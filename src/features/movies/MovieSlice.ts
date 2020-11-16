@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { AppThunk } from '../../../App';
-import { networkInterfaces } from 'os';
 
 // Interace of one movie object
 export interface Movie {
@@ -89,11 +88,17 @@ const movieSlice = createSlice({
         }
       });
     },
-    setTotalCount: (state, { payload }: PayloadAction<number>) => {
-      state.totalCount = payload;
-    },
     setPage: (state, { payload }: PayloadAction<number>) => {
       state.page = payload;
+    },
+    toggleFavorite: (state, { payload }: PayloadAction<string>) => {
+      state.movies.map((movie: Movie) => {
+        // Switch the favorite boolean of the movie
+        if (movie._id === payload) {
+          movie.Favorite = !movie.Favorite;
+        }
+        return movie;
+      });
     },
   },
 });
@@ -135,13 +140,30 @@ export const getMovies = (
   };
 };
 
+// Update a movie
+export const updateMovie = (movie: Movie): AppThunk => {
+  const url = 'http://it2810-32.idi.ntnu.no:3000/api/movies/' + movie._id;
+  console.log('Calling update movie');
+
+  return async () => {
+    axios
+      .put(url, movie)
+      .then((res) => {
+        console.log('Updated movie result: ', res);
+      })
+      .catch((e) => {
+        console.log('error trying to update movie: ', e);
+      });
+  };
+};
+
 export const {
   setLoading,
   setMovies,
-  setTotalCount,
   appendMovies,
   setPage,
   setHeader,
+  toggleFavorite,
 } = movieSlice.actions;
 export default movieSlice.reducer;
 export const movieSelector = (state: { movieStore: MovieState }) =>

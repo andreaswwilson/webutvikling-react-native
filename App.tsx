@@ -1,11 +1,11 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Navigator } from './client/navigator';
+import { Navigator } from './src/navigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThunkAction } from 'redux-thunk';
 import movieSliceReducer, {
   MovieState,
-} from './client/features/movies/MovieSlice';
+} from './src/features/movies/MovieSlice';
 import { configureStore, Action } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 

@@ -10,8 +10,8 @@ import {
   Movie,
   movieSelector,
   setHeader,
-} from './../features/movies/MovieSlice';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+} from '../features/movies/MovieSlice';
+import { TouchableOpacity } from 'react-native';
 import { MovieCard } from '../components/MovieCard';
 
 type HomeScreenNavigationProps = StackNavigationProp<StackParamList, 'Home'>;
@@ -23,9 +23,9 @@ interface HomeScreenProps {
 export const HomeScreen: React.FunctionComponent<HomeScreenProps> = (
   props,
 ): JSX.Element => {
+  const { navigation } = props;
   // Using local state for updating setSearchQuery
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const { navigation } = props;
   const dispatch = useDispatch();
   const { movies, loading, page } = useSelector(movieSelector);
 
