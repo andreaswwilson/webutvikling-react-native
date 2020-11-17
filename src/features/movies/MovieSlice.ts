@@ -81,6 +81,23 @@ const movieSlice = createSlice({
       state.header = payload;
     },
 
+    addReview: (
+      state,
+      { payload }: PayloadAction<{ movie: Movie; review: string }>,
+    ) => {
+      const { movie, review } = payload;
+      state.movies.map((m: Movie) => {
+        if (m._id === movie._id) {
+          if (m.Reviews) {
+            m.Reviews.push(review);
+          } else {
+            m.Reviews = [review];
+          }
+          console.log(m.Reviews);
+        }
+      });
+    },
+
     appendMovies: (state, { payload }: PayloadAction<Movie[]>) => {
       payload.forEach((movie) => {
         if (state.movies.indexOf(movie) == -1) {
@@ -106,17 +123,23 @@ const movieSlice = createSlice({
 // AppThunk sets the type definitions for the dispatch method
 export const getMovies = (
   title: string = '',
+  genre: string[] = [''],
   page: number = 1,
   append: boolean = false,
 ): AppThunk => {
-  return async (dispatch) => {
+  return async (dispatch: any) => {
     dispatch(setLoading(true));
     try {
-      const baseURL =
+      let baseURL =
         'http://it2810-32.idi.ntnu.no:3000/api/movies?title=' +
         title +
         '&page=' +
         page;
+      genre.forEach((g) => {
+        if (g.length > 0) {
+          baseURL += '&genre[]=' + g;
+        }
+      });
       console.log('Get request:', baseURL);
       await axios
         .get(baseURL)
@@ -143,7 +166,6 @@ export const getMovies = (
 // Update a movie
 export const updateMovie = (movie: Movie): AppThunk => {
   const url = 'http://it2810-32.idi.ntnu.no:3000/api/movies/' + movie._id;
-  console.log('Calling update movie');
 
   return async () => {
     axios
@@ -164,6 +186,7 @@ export const {
   setPage,
   setHeader,
   toggleFavorite,
+  addReview,
 } = movieSlice.actions;
 export default movieSlice.reducer;
 export const movieSelector = (state: { movieStore: MovieState }) =>
