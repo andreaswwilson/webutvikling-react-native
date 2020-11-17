@@ -15,6 +15,7 @@
     "@react-navigation/native": "^5.8.9",
     "@react-navigation/stack": "^5.12.6",
     "@reduxjs/toolkit": "^1.4.0",
+    "@types/jest": "^26.0.15",
     "@types/react-redux": "^7.1.11",
     "axios": "^0.21.0",
     "expo": "~39.0.2",
@@ -30,6 +31,7 @@
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.2",
+    "react-test-render": "^1.1.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
@@ -38,7 +40,6 @@
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
-    "detox": "^17.11.4",
     "typescript": "~3.9.5"
   },
   "private": true
