@@ -10,7 +10,10 @@
 4. expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 5. expo start -c
 
-Installer expo app på mobilen, evt installer en simulator for android/ios. Scan QR koden fra expo appen på datamaskinen.
+Installer expo app på mobilen, evt installer en simulator for android/ios. 
+Scan QR koden fra expo appen på datamaskinen.
+Expo client ios : https://apps.apple.com/app/apple-store/id982107779
+Expo client android : https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=www
 
 Backend kjører på NTNU VM og er tilgjengelig også utenfor NTNU-nettverket.
 Backend er helt uendret fra prosjekt 3. Dette er bevisst siden det er lagt opp
