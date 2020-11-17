@@ -99,9 +99,11 @@ const movieSlice = createSlice({
     },
 
     appendMovies: (state, { payload }: PayloadAction<Movie[]>) => {
+      const existingIds = [...state.movies.map((m) => m._id)];
       payload.forEach((movie) => {
-        if (state.movies.indexOf(movie) == -1) {
+        if (!existingIds.includes(movie._id)) {
           state.movies.push(movie);
+          existingIds.push(movie._id);
         }
       });
     },
@@ -125,6 +127,7 @@ export const getMovies = (
   title: string = '',
   genre: string[] = [''],
   page: number = 1,
+  sort: string = '',
   append: boolean = false,
 ): AppThunk => {
   return async (dispatch: any) => {
@@ -134,7 +137,9 @@ export const getMovies = (
         'http://it2810-32.idi.ntnu.no:3000/api/movies?title=' +
         title +
         '&page=' +
-        page;
+        page +
+        '&sortByYear=' +
+        sort;
       genre.forEach((g) => {
         if (g.length > 0) {
           baseURL += '&genre[]=' + g;

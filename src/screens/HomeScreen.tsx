@@ -33,6 +33,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = (
   const { navigation } = props;
   // Using local state for updating setSearchQuery
   const [searchQuery, setSearchQuery] = useState<string>('');
+
   const dispatch = useDispatch();
   const { movies, loading, page } = useSelector(movieSelector);
 
@@ -41,6 +42,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = (
 
   // Keep track of filter state
   const [checkBoxFilter, setCheckBoxFilter] = useState<string[]>([]);
+  const [sortByYear, setSortByYear] = useState<string>('');
 
   const toggleOverlay = () => {
     setVisible(!visible);
@@ -108,13 +110,39 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = (
               updateFilter('comedy');
             }}
           />
-
+          <Text h4 style={{ textAlign: 'center' }}>
+            Sort by
+          </Text>
+          <CheckBox
+            title='Year descending'
+            checked={sortByYear === 'descending'}
+            onPress={() => {
+              if (sortByYear === 'descending') {
+                setSortByYear('');
+              } else {
+                setSortByYear('descending');
+              }
+            }}
+          />
+          <CheckBox
+            title='Year ascending'
+            checked={sortByYear === 'ascending'}
+            onPress={() => {
+              if (sortByYear === 'ascending') {
+                setSortByYear('');
+              } else {
+                setSortByYear('ascending');
+              }
+            }}
+          />
           <Button
             title='Apply filter'
             onPress={() => {
               toggleOverlay();
               dispatch(setPage(1));
-              dispatch(getMovies(searchQuery, checkBoxFilter, 1));
+              dispatch(
+                getMovies(searchQuery, checkBoxFilter, 1, sortByYear, false),
+              );
             }}
           />
         </View>
@@ -129,14 +157,16 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = (
           dispatch(setPage(1));
           setSearchQuery('');
           setCheckBoxFilter([]);
-          dispatch(getMovies('', checkBoxFilter, 1));
+          dispatch(getMovies('', checkBoxFilter, 1, sortByYear));
         }}
         refreshing={false}
         // Get more data from backend when scrolling down
         onEndReachedThreshold={0.4} // run onEndReach when reaching bottom
         onEndReached={() => {
           // Add more movies to state when on bottom
-          dispatch(getMovies(searchQuery, checkBoxFilter, page + 1, true));
+          dispatch(
+            getMovies(searchQuery, checkBoxFilter, page + 1, sortByYear, true),
+          );
           // Increase page for next api query
           dispatch(setPage(page + 1));
         }}
