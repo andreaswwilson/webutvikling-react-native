@@ -36,3 +36,9 @@ til gjenbruk av kode.
 5. Prosjektet er dokumentert via readme.
 
 Det er gjenbrukt kode i så stor grad som mulig fra forrige prosjekt. Backend er helt uendret og kjører på ntnu vm.
+
+Styling er gjort med react-native-elements. Jeg valgte denne fordi de mer populære UI-bibliotekene
+(Material-UI og Ant Design) var litt mer trøblete å sette opp fordi det måtte linkes fonter og ikoner.
+Jeg ville ha en enkel kjøring slik at jeg var sikker på at prosjektet kunne kjøres på andre maskiner ved peerreview.
+
+Reduxjs-toolkit er brukt for å implementere redux.
