@@ -60,7 +60,8 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = (
     }
   };
   return (
-    <View>
+    // Add margin to bottom to avoid bug that partially hides the last element on iOs
+    <View style={{ marginBottom: 150 }}>
       {/* Adding SearchBar. Platform = android just sets the styling.
       Using hooks to keep track of the input */}
 
@@ -73,6 +74,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = (
           dispatch(setPage(1));
         }}
       />
+      {/* Filter and sort button */}
       <Button
         type='outline'
         style={{ backgroundColor: 'white' }}
@@ -80,6 +82,7 @@ export const HomeScreen: React.FunctionComponent<HomeScreenProps> = (
         onPress={toggleOverlay}
       />
 
+      {/* Overlay for when user is clicking on filter button */}
       <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
         <View
           style={{
