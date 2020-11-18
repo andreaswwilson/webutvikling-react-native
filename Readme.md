@@ -7,7 +7,7 @@
 1. git clone https://gitlab.stud.idi.ntnu.no/it2810-h20/team-ad-hoc/prosjekt-4-andrewwi.git
 2. Installer expo.io for ditt operativsystem. https://docs.expo.io/
 3. npm install
-4. expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+4. expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view --npm
 5. expo start -c
 
 Installer expo app på mobilen, evt installer en simulator for android/ios. 
