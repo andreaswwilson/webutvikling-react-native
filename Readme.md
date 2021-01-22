@@ -2,6 +2,10 @@
 
 **Skrevet av**: Andreas Wilson
 
+## Kort om prosjektet
+Prosjektet er laget med stacken MERN (mongdo, express,react,node) og er skrevet i typescript.
+Prosjektet er er en mobilapplikasjon og er en movieDB.
+
 ## Hvordan sette opp og kjøre prosjektet
 
 1. git clone https://gitlab.stud.idi.ntnu.no/it2810-h20/team-ad-hoc/prosjekt-4-andrewwi.git
